@@ -421,9 +421,16 @@ def register(app, db):
     "⬇️ Downloading..."
 )
 
+status._start_time = time.time()
+
 path = await client.download_media(
     message,
     file_name=TEMP_DIR + "/",
+    progress=progress,
+    progress_args=(
+        status,
+        "⬇️ Downloading",
+    ),
 )
 
 
