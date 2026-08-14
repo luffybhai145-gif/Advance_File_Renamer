@@ -383,40 +383,37 @@ def register(app, db):
 
 
         @app.on_message(
-        filters.private
-        & (
-            filters.document
-            | filters.video
-            | filters.audio
-        )
+    filters.private
+    & (
+        filters.document
+        | filters.video
+        | filters.audio
+    )
+)
+async def receive_file(
+    client,
+    message,
+):
+    uid = (
+        message.from_user.id
+        if message.from_user
+        else 0
     )
 
-        
-    async def receive_file(
-        client,
-        message,
+    if (
+        uid not in ADMIN_IDS
+        or uid not in SESSIONS
     ):
+        return
 
-        uid = (
-            message.from_user.id
-            if message.from_user
-            else 0
-        )
+    session = SESSIONS[uid]
 
-        if (
-            uid not in ADMIN_IDS
-            or uid not in SESSIONS
-        ):
-            return
+    if session["stage"] != "file":
+        return
 
-        session = SESSIONS[uid]
-
-        if session["stage"] != "file":
-            return
-
-        status = await message.reply_text(
-            "⬇️ Downloading..."
-        )
+    status = await message.reply_text(
+        "⬇️ Downloading..."
+    )
 
         status._start_time = time.time()
 
