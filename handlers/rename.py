@@ -1,5 +1,10 @@
 import os
 import asyncio
+import time
+
+from pyrogram import filters
+
+from utils.progress import progress
 
 from pyrogram import filters
 from pyrogram.types import (
@@ -413,8 +418,13 @@ def register(app, db):
 
 
         status = await message.reply_text(
-            "⬇️ Downloading..."
-        )
+    "⬇️ Downloading..."
+)
+
+path = await client.download_media(
+    message,
+    file_name=TEMP_DIR + "/",
+)
 
 
         path = None
@@ -916,9 +926,17 @@ def register(app, db):
                     )
 
 
-            await status.edit_text(
-                "⬆️ Uploading..."
-            )
+            status._start_time = time.time()
+
+await client.send_document(
+    chat_id,
+    output_file,
+    progress=progress,
+    progress_args=(
+        status,
+        "⬆️ Uploading",
+    ),
+)
 
 
             await client.send_document(
@@ -930,7 +948,7 @@ def register(app, db):
                 file_name=output_name,
 
                 caption=(
-                    "✅ <b>Processing completed.</b>"
+                    "{File_Name}"
                 ),
             )
 
