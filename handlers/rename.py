@@ -410,43 +410,37 @@ def register(app, db):
             return
 
 
-        session = SESSIONS[uid]
-
+                session = SESSIONS[uid]
 
         if session["stage"] != "file":
-
             return
 
-
         status = await message.reply_text(
-    "⬇️ Downloading..."
-)
+            "⬇️ Downloading..."
+        )
 
-status._start_time = time.time()
-
-path = await client.download_media(
-    message,
-    file_name=TEMP_DIR + "/",
-    progress=progress,
-    progress_args=(
-        status,
-        "⬇️ Downloading",
-    ),
-)
-
+        status._start_time = time.time()
 
         path = None
 
-
         try:
-
             path = await client.download_media(
                 message,
                 file_name=TEMP_DIR + "/",
+                progress=progress,
+                progress_args=(
+                    status,
+                    "⬇️ Downloading",
+                ),
             )
 
-
             session["path"] = path
+
+        except Exception as e:
+            await status.edit_text(
+                f"❌ Download failed:\n`{e}`"
+            )
+            return
 
             session["message"] = message
 
