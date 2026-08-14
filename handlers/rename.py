@@ -22,6 +22,7 @@ from utils.ffmpeg import (
     probe,
     stream_summary,
     process,
+    set_metadata,
     FFmpegError,
 )
 
