@@ -19,12 +19,12 @@ logger = logging.getLogger("AdvancedFileRenamer")
 
 app = Client(
     "advanced_file_renamer",
-    api_id=15055049,
-    api_hash=abe3f66fcd80c91e53009ba52c7b3a83,
-    bot_token=8784253318:AAGkOy2f650Jzlr-x8XvcuaMVQmd-BBHumA,
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN,
 )
 
-db = Database("mongodb+srv://newsudo:786780@cluster0.pbiae8a.mongodb.net/?appName=Cluster0")
+db = Database("bot.db")
 
 register_start(app, db)
 register_rename(app, db)
