@@ -26,8 +26,12 @@ from utils.filename import sanitize_filename
 SESSIONS = {}
 
 
+# ==============================
+# FFMPEG CONCURRENCY LIMIT
+# ==============================
+
 FFMPEG_SEMAPHORE = asyncio.Semaphore(
-    MAX_CONCURRENT_TRANSCODES
+    MAX_CONCURRENT_FFMPEG
 )
 
 
