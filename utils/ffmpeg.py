@@ -386,6 +386,98 @@ async def process(
             subtitle_indices=subtitle_indices,
         )
 
+    async def set_metadata(
+    input_file,
+    output_file,
+    title=None,
+    artist=None,
+    album=None,
+    genre=None,
+    comment=None,
+):
+
+    command = [
+
+        "ffmpeg",
+
+        "-y",
+
+        "-i",
+        str(input_file),
+
+        "-map",
+        "0",
+
+        "-map_metadata",
+        "0",
+
+        "-c",
+        "copy",
+    ]
+
+
+    if title:
+
+        command.extend(
+            [
+                "-metadata",
+                f"title={title}",
+            ]
+        )
+
+
+    if artist:
+
+        command.extend(
+            [
+                "-metadata",
+                f"artist={artist}",
+            ]
+        )
+
+
+    if album:
+
+        command.extend(
+            [
+                "-metadata",
+                f"album={album}",
+            ]
+        )
+
+
+    if genre:
+
+        command.extend(
+            [
+                "-metadata",
+                f"genre={genre}",
+            ]
+        )
+
+
+    if comment:
+
+        command.extend(
+            [
+                "-metadata",
+                f"comment={comment}",
+            ]
+        )
+
+
+    command.append(
+        str(output_file)
+    )
+
+
+    await run_command(
+        command
+    )
+
+
+    return output_file
+
 
     maps = [
 
