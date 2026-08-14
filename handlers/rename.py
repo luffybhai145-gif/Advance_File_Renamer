@@ -382,7 +382,7 @@ def register(app, db):
         await query.answer()
 
 
-    @app.on_message(
+        @app.on_message(
         filters.private
         & (
             filters.document
@@ -401,16 +401,13 @@ def register(app, db):
             else 0
         )
 
-
         if (
             uid not in ADMIN_IDS
             or uid not in SESSIONS
         ):
-
             return
 
-
-                session = SESSIONS[uid]
+        session = SESSIONS[uid]
 
         if session["stage"] != "file":
             return
@@ -435,6 +432,7 @@ def register(app, db):
             )
 
             session["path"] = path
+            session["message"] = message
 
         except Exception as e:
             await status.edit_text(
@@ -442,12 +440,9 @@ def register(app, db):
             )
             return
 
-            session["message"] = message
-
-
-            await status.edit_text(
-                "🔎 Detecting streams..."
-            )
+        await status.edit_text(
+            "🔎 Detecting streams..."
+        )
 
 
             info = await probe(
