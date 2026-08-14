@@ -23,6 +23,7 @@ API_HASH = required("API_HASH")
 
 BOT_TOKEN = required("BOT_TOKEN")
 
+DATABASE_URL = required("DB_URL")
 
 ADMIN_IDS = {
     int(user_id.strip())
