@@ -1,5 +1,8 @@
 import os
 
+TEMP_DIR = os.getenv("TEMP_DIR", "/tmp")
+
+
 def required(name):
     value = os.getenv(name)
     if not value:
