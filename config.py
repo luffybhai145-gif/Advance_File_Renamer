@@ -1,6 +1,7 @@
 import os
 
 TEMP_DIR = os.getenv("TEMP_DIR", "/tmp")
+MAX_CONCURRENT_FFMPEG = os.getenv("MAX_CONCURRENT_FFMPEG", "1")
 
 
 def required(name):
