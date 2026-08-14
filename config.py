@@ -1,7 +1,8 @@
 import os
 
 TEMP_DIR = os.getenv("TEMP_DIR", "/tmp")
-MAX_CONCURRENT_FFMPEG = os.getenv("MAX_CONCURRENT_FFMPEG", "1")
+# ✅ CORRECT (casting to int)
+FFMPEG_SEMAPHORE = asyncio.Semaphore(int(os.getenv("MAX_CONCURRENT_TRANSCODES", 1)))
 
 
 def required(name):
