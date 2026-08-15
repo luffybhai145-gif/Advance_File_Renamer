@@ -378,21 +378,21 @@ async def rename_button(
     )
 )
 async def receive_file(
-        client,
-        message,
+    client,
+    message,
+):
+    uid = (
+        message.from_user.id
+        if message.from_user
+        else 0
+    )
+    if (
+        uid not in ADMIN_IDS
+        or uid not in SESSIONS
     ):
-        uid = (
-            message.from_user.id
-            if message.from_user
-            else 0
-        )
-        if (                        
-            uid not in ADMIN_IDS
-            or uid not in SESSIONS
-        ):
-            return
+        return
 
-        session = SESSIONS[uid]
+    session = SESSIONS[uid]
 
     if session["stage"] != "file":
         return
@@ -401,15 +401,15 @@ async def receive_file(
         "⬇️ Downloading..."
     )
 
-        status._start_time = time.time()
+    status._start_time = time.time()
 
-        path = None
+    path = None
 
-        try:
-            path = await client.download_media(
-                message,
-                file_name=TEMP_DIR + "/",
-                progress=progress,
+    try:
+        path = await client.download_media(
+            message,
+                file_name=TEMP_DIR + "/",     ← extra indent (thappu)
+                progress=progress,             ← extra indent (thappu)
                 progress_args=(
                     status,
                     "⬇️ Downloading",
