@@ -363,12 +363,11 @@ async def rename_button(
         "selected": set(),
     }
 
-await query.message.reply_text(
-    "📤 Send your media file."
+    await query.message.reply_text(
+        "📤 Send your media file."
     )
 
     await query.answer()
-
 
 @app.on_message(
     filters.private
