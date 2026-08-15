@@ -356,7 +356,7 @@ def register(app, db):
             return
 
 
-        SESSIONS[
+                SESSIONS[
             query.from_user.id
         ] = {
 
@@ -375,11 +375,12 @@ def register(app, db):
         }
 
 
-                await query.message.reply_text(
+        await query.message.reply_text(
             "📤 Send your media file."
         )
 
         await query.answer()
+
 
     @app.on_message(
         filters.private
@@ -393,12 +394,11 @@ def register(app, db):
         client,
         message,
     ):
-    uid = (
-        message.from_user.id
-        if message.from_user
-        else 0
-    )
-
+        uid = (
+            message.from_user.id
+            if message.from_user
+            else 0
+        )
     if (
         uid not in ADMIN_IDS
         or uid not in SESSIONS
