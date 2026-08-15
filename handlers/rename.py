@@ -386,7 +386,7 @@ async def receive_file(
             if message.from_user
             else 0
         )
-        if (                        ← ippo 8 spaces
+        if (                        
             uid not in ADMIN_IDS
             or uid not in SESSIONS
         ):
