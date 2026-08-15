@@ -378,21 +378,22 @@ async def rename_button(
     )
 )
 async def receive_file(
-    client,
-    message,
-):
+async def receive_file(
+        client,
+        message,
+    ):
         uid = (
             message.from_user.id
             if message.from_user
             else 0
         )
-    if (
-        uid not in ADMIN_IDS
-        or uid not in SESSIONS
-    ):
-        return
+        if (                        ← ippo 8 spaces
+            uid not in ADMIN_IDS
+            or uid not in SESSIONS
+        ):
+            return
 
-    session = SESSIONS[uid]
+        session = SESSIONS[uid]
 
     if session["stage"] != "file":
         return
