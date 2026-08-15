@@ -373,18 +373,18 @@ await query.message.reply_text(
 await query.answer()
 
 
-    @app.on_message(
-        filters.private
-        & (
-            filters.document
-            | filters.video
-            | filters.audio
-        )
+@app.on_message(
+    filters.private
+    & (
+        filters.document
+        | filters.video
+        | filters.audio
     )
-    async def receive_file(
-        client,
-        message,
-    ):
+)
+async def receive_file(
+    client,
+    message,
+):
         uid = (
             message.from_user.id
             if message.from_user
