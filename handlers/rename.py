@@ -355,31 +355,22 @@ def register(app, db):
 
             return
 
-    SESSIONS[
-            query.from_user.id
-        ] = {
+SESSIONS[
+    query.from_user.id
+] = {
+    "stage": "file",
+    "message": None,
+    "path": None,
+    "info": None,
+    "action": None,
+    "selected": set(),
+}
 
-            "stage": "file",
+await query.message.reply_text(
+    "📤 Send your media file."
+)
 
-            "message": None,
-
-            "path": None,
-
-            "info": None,
-
-            "action": None,
-
-            "selected": set(),
-
-        }
-
-
-    await 
-query.message.reply_text(
-            "📤 Send your media file."
-        )
-
-        await query.answer()
+await query.answer()
 
 
     @app.on_message(
