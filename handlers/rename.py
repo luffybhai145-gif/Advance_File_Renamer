@@ -381,7 +381,6 @@ def register(app, db):
 
                 await query.answer()
 
-
     @app.on_message(
         filters.private
         & (
