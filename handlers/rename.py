@@ -375,11 +375,11 @@ def register(app, db):
         }
 
 
-        await query.message.reply_text(
+                await query.message.reply_text(
             "📤 Send your media file."
         )
 
-                await query.answer()
+        await query.answer()
 
     @app.on_message(
         filters.private
