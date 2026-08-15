@@ -355,8 +355,7 @@ def register(app, db):
 
             return
 
-
-                SESSIONS[
+    SESSIONS[
             query.from_user.id
         ] = {
 
