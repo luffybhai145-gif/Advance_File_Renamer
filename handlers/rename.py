@@ -408,41 +408,37 @@ async def receive_file(
     try:
         path = await client.download_media(
             message,
-                file_name=TEMP_DIR + "/",     ← extra indent (thappu)
-                progress=progress,             ← extra indent (thappu)
-                progress_args=(
-                    status,
-                    "⬇️ Downloading",
-                ),
-            )
-
-            session["path"] = path
-            session["message"] = message
-
-        except Exception as e:
-            await status.edit_text(
-                f"❌ Download failed:\n`{e}`"
-            )
-            return
-
-        await status.edit_text(
-            "🔎 Detecting streams..."
+            file_name=TEMP_DIR + "/",
+            progress=progress,
+            progress_args=(
+                status,
+                "⬇️ Downloading",
+            ),
         )
 
+        session["path"] = path
+        session["message"] = message
 
-            info = await probe(
-                path
-            )
+    except Exception as e:
+        await status.edit_text(
+            f"❌ Download failed:\n`{e}`"
+        )
+        return
 
+    await status.edit_text(
+        "🔎 Detecting streams..."
+    )
 
-            session["info"] = info
+    info = await probe(
+        path
+    )
 
-            session["stage"] = "action"
+    session["info"] = info
+    session["stage"] = "action"
 
-
-            summary = stream_summary(
-                info
-            )
+    summary = stream_summary(
+        info
+    )
 
 
             text = (
