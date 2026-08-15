@@ -378,7 +378,6 @@ async def rename_button(
     )
 )
 async def receive_file(
-async def receive_file(
         client,
         message,
     ):
