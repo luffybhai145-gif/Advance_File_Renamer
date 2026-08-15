@@ -335,42 +335,39 @@ def register(app, db):
         )
 
 
-    @app.on_callback_query(
-        filters.regex("^rename$")
-    )
-    async def rename_button(
-        client,
-        query,
-    ):
-
-        if (
-            query.from_user.id
-            not in ADMIN_IDS
-        ):
-
-            await query.answer(
-                "Unauthorized.",
-                show_alert=True,
-            )
-
-            return
-
-SESSIONS[
-    query.from_user.id
-] = {
-    "stage": "file",
-    "message": None,
-    "path": None,
-    "info": None,
-    "action": None,
-    "selected": set(),
-}
-
-await query.message.reply_text(
-    "📤 Send your media file."
+@app.on_callback_query(
+    filters.regex("^rename$")
 )
+async def rename_button(
+    client,
+    query,
+):
 
-await query.answer()
+    if query.from_user.id not in ADMIN_IDS:
+
+        await query.answer(
+            "Unauthorized.",
+            show_alert=True,
+        )
+
+        return
+
+    SESSIONS[
+        query.from_user.id
+    ] = {
+        "stage": "file",
+        "message": None,
+        "path": None,
+        "info": None,
+        "action": None,
+        "selected": set(),
+    }
+
+ await query.message.reply_text(
+        "📤 Send your media file."
+    )
+
+    await query.answer()
 
 
 @app.on_message(
